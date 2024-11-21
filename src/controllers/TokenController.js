@@ -3,10 +3,7 @@ import jwt from "jsonwebtoken";
 
 class TokenController {
   async store(req, res) {
-    const { email = "", password = "" } = {
-      email: "kauanps2271@gmail.com",
-      password: "123456",
-    };
+    const { email = "", password = "" } = req.body;
 
     if (!email || !password) {
       return res.status(401).json({
@@ -32,7 +29,7 @@ class TokenController {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
-    res.json({ token });
+    res.json({ token, user: { nome: user.nome, id, email } });
   }
 }
 
