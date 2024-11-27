@@ -19,7 +19,14 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+      })
+    );
+
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
